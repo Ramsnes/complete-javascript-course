@@ -34,4 +34,18 @@ console.log(norwaySplit > finland);
 const averagePopulation = 33;
 console.log(norwaySplit < averagePopulation);
 
-console.log(country + " " + "is in Europe, and its" + " " + norwaySplit + " " + "million people" + " " + "speak Norwegian.");
+const description = country + " " + "is in Europe, and its" + " " + norwaySplit + " " + "million people" + " " + "speak Norwegian.";
+console.log(description);
+
+// Strings and Template Literals
+const betterDescription = `${country} is in Europe, and it's ${norwaySplit} million people speak ${language}.`
+console.log(betterDescription);
+
+// Taking Decisions: if / else Statements
+// population = 6 - line 5
+// averagePopulation = 33 - line 34
+if (population > averagePopulation) {
+    console.log(`${country}'s is above average`)
+} else {
+    console.log(`${country}'s population is ${averagePopulation - population} million below average`)
+}
