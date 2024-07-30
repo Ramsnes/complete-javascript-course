@@ -23,10 +23,10 @@ const closeModal = function () {
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
-//// Handling an "Esc" Keypress Event ////
+// Handling an "Esc" Keypress Event //
 // Closes modal/overlay by pressing 'Escape'(if .hidden class is NOT present)
 document.addEventListener('keydown', function (e) {
-  console.log(e); // key: 'Escape' - // Adding/logging (e) param lets ut look at events in console
+  console.log(e); // key: 'Escape' - Logging (e) param lets ut look at events in console
   console.log(e.key); // Escape
 
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {

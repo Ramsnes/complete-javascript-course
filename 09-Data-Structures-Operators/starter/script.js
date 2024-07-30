@@ -26,4 +26,144 @@ const restaurant = {
       close: 24,
     },
   },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  // Direct destructuring
+  orderDelivery: function ({
+    time = 'default 20:00',
+    address = 'default address',
+    mainIndex,
+    starterIndex = 0,
+  }) {
+    console.log(
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time} o'clock.`
+    );
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
+    );
+  },
 };
+
+// Utilizes the orderDelivery method object within the restaurant object
+restaurant.orderDelivery({
+  time: '22.30',
+  address: 'Nordre gate',
+  mainIndex: 2,
+  starterIndex: 2,
+});
+
+//
+// Destructure object;
+// if not destructured: const name = restaurant.name
+const { name, openingHours, categories } = restaurant;
+console.log(name, openingHours, categories);
+// Destructure object, but change variable names
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurant;
+console.log(restaurantName, hours, tags);
+
+// Default value set and empty array if object non-existence. Useful for API data where consistent results are uncertain
+const { menu = [], starterMenu: starters = [] } = restaurant;
+console.log(menu, starters); // [] (4)
+//
+// Destructure array
+// console.log(restaurant.order(0, 1));
+// Destructured - how to receive 2 return values from a fn (comma separated)
+const [starterCourse, mainCourse] = restaurant.order(0, 1);
+console.log(starterCourse, mainCourse);
+
+// Nested objects
+const {
+  fri: { open, close },
+} = openingHours;
+console.log(`Opening hours from ${open} to ${close}`);
+
+//---- Spread operator ----//
+
+// Include current array values into a new array
+const arr = [7, 8, 9];
+const newArr = [1, 2, ...arr];
+console.log(newArr); // (5) [1, 2, 7, 8, 9]
+console.log(...newArr); // 1 2 7 8 9
+
+console.log(restaurant.mainMenu); // (3) ['Pizza', 'Pasta', 'Risotto']
+const newMenu = [...restaurant.mainMenu, 'bolognese'];
+const evenNewerMenu = [...newMenu, 'grandiosa'];
+console.log(evenNewerMenu); // (5) ['Pizza', 'Pasta', 'Risotto', 'bolognese', 'grandiosa']
+
+// Copy array
+const copyMainMenu = [...restaurant.mainMenu];
+console.log(copyMainMenu);
+
+// Join 2 arrays or more
+const fullMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(fullMenu);
+
+const str = 'Morten';
+const letters = [...str, ' ', 'R.'];
+console.log(letters); // (8) ['M', 'o', 'r', 't', 'e', 'n', ' ', 'R.']
+
+// Real world example
+// Makes prompts that logs the inputs typed in into the 'orderPasta ' method in the 'restaurant' object
+const ingredients = [
+  // prompt('lets make pasta! Ingredient 1?'),
+  // prompt('Ingredient 2?'),
+  // prompt('Ingredient 3?'),
+];
+console.log(ingredients);
+
+// Call fn 'orderPasta'
+restaurant.orderPasta(...ingredients);
+// Instead of
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+
+// Objects
+const newRestaurant = {
+  foundedIn: 1988,
+  ...restaurant,
+  founder: 'Morten Ramfjord',
+};
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorrrrante';
+console.log(restaurant.name); // Classico Italiano (original)
+console.log(restaurantCopy.name); // Ristorrrrante (new name)
+
+//---- REST patters ----//
+
+// 1) Destructuring
+
+// Arrays
+// SPREAD, because on RIGHT side of =
+const spreadArr = [1, 2, ...[3, 4]];
+console.log(spreadArr); // (4) [1, 2, 3, 4]
+
+// REST, because on LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others); // 1 2 [3, 4, 5]
+
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, otherFood); // Pizza Risotto (4) ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+// Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays); // {thu: {…}, fri: {…}}
+
+// 2) Functions
+const add = function (...numbers) {
+  console.log(numbers);
+};
+// Numbers comressed into an array
+add(2, 3);
+add(2, 3, 3, 5, 6);
+add(2, 3, 5, 7, 8, 9);
