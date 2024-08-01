@@ -45,6 +45,12 @@ const restaurant = {
       `Here is your delicious pasta with ${ing1}, ${ing2} and ${ing3}`
     );
   },
+  // mainIngredient is mandatory, otherIngredient is not (...)
+  // (...otherIngredient) will collect all of the REST of the arguments into an array
+  orderPizza: function (mainIngredient, ...otherIngredient) {
+    console.log(mainIngredient);
+    console.log(otherIngredient);
+  },
 };
 
 // Utilizes the orderDelivery method object within the restaurant object
@@ -161,9 +167,19 @@ console.log(weekdays); // {thu: {…}, fri: {…}}
 
 // 2) Functions
 const add = function (...numbers) {
-  console.log(numbers);
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++) sum += numbers[i]; // adds current number to the current sum
+  console.log(sum);
 };
 // Numbers comressed into an array
-add(2, 3);
-add(2, 3, 3, 5, 6);
-add(2, 3, 5, 7, 8, 9);
+add(2, 3); // 5
+add(2, 4, 6, 8, 9); // 29
+
+// Calling the 'add function' with the values in array 'x' using the spread operator
+const x = [23, 5, 7];
+add(...x);
+console.log(x); // (3) [23, 5, 7]
+
+restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+
+console.log(3 || 'Morten');
