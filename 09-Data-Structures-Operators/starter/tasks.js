@@ -311,3 +311,20 @@ function spellWord(word) {
   console.log(...word); // ...spreads all elements typed in
 }
 spellWord('JavaScript');
+
+//---- Rest Pattern and Parameters ----//
+// https://codingheroes.io/assignments/rest-pattern-and-parameters.html#4-1
+
+// 4.1
+const [mainKeyword, ...rest] = [books[0].keywords];
+console.log(mainKeyword, rest);
+
+// 4.2
+const [bookPublisher, ...restOfTheBook] = [books[1].publisher];
+console.log(bookPublisher, restOfTheBook);
+
+// 4.3
+function printBookAuthorsCount(title, ...authors) {
+  console.log(`The book "${title}" has ${authors.length} authors`);
+}
+printBookAuthorsCount('Algorithms', 'Robert Sedgewick', 'Kevin Wayne'); // arg1 logs the book, arg2 logs the REST of authors
